@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    tools:context=".screen.loginScreen.fragment.LoginFragment">
+
+
+    <TextView
+        android:id="@+id/textLoginFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:fontFamily="@font/abel"
+        android:textSize="36dp"
+        android:paddingStart="18dp"
+        android:textColor="@color/black"
+        />
+    <EditText
+        android:id="@+id/editTextUsernameFragment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="12dp"
+        android:textSize="18dp"
+        android:fontFamily="@font/abel"
+        android:textColor="@color/black"
+        android:layout_marginTop="40dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_proflie_outline"
+        android:drawablePadding="12dp"
+        android:hint="Login"
+        android:inputType="text" />
+
+
+    <EditText
+        android:id="@+id/editTextPasswordFragment"
+        android:paddingStart="12dp"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/abel"
+        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_proflie_outline"
+        android:drawablePadding="12dp"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/btnLoginFragment"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/edit_text_background"
+        android:text="Login"
+        android:fontFamily="@font/abel"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:layout_marginHorizontal="20dp"
+        android:backgroundTint="#CFADE8"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <TextView
+        android:id="@+id/textViewAccountLoginFragment"
+        android:text="Chưa có tài khoản? Đăng ký Ngay"
+        android:textAlignment="center"
+        android:paddingTop="8dp"
+        android:fontFamily="@font/abel"
+        android:textColor="#F40F0F"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>
