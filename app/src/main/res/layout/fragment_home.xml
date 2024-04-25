@@ -1,15 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:id="@+id/homeFragment"
+    android:background="#ABE5BC"
     tools:context=".screen.homeScreen.fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="12dp"
+        >
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+         <TextView
+             android:id="@+id/text_view_hi"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintStart_toStartOf="parent"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="Hi,"
+             android:fontFamily="@font/abel"
+             android:textSize="28sp"
+             android:textColor="@color/black"
+             />
+
+            <TextView
+                android:id="@+id/text_view_name_user"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_hi"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="YourName"
+                android:paddingStart="10dp"
+                android:textColor="@color/black"
+                android:textSize="38sp"
+                android:fontFamily="@font/abel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+            <EditText
+                android:id="@+id/search_quiz_set"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:paddingLeft="12dp"
+                android:textSize="18dp"
+                android:backgroundTint="@color/white"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_name_user"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/abel"
+                android:textColor="@color/black"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/edit_search_home_background"
+                android:drawableStart="@drawable/icon_search"
+                android:drawablePadding="12dp"
+                android:hint="Interview for?.."
+                android:inputType="text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@drawable/linear_item_quiz_sets_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/text_quiz_set_linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:text="Quiz Sets"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_quiz_set"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="8dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="72dp"/>
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

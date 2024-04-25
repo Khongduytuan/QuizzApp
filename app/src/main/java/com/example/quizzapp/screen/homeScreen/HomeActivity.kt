@@ -14,7 +14,8 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeBinding = ActivityHomeBinding.inflate(layoutInflater)
-        //setContentView(homeBinding.root)
+        setContentView(homeBinding.root)
+
 
 
         // Tạo NavController từ NavHostFragment
@@ -49,8 +50,7 @@ class HomeActivity : AppCompatActivity() {
                     homeBinding.bottomNavHome.menu.findItem(R.id.controllerFragment).setIcon(R.drawable.icon_controller)
                 }
             }
-            false
-
+            true
         }
 
 //        homeBinding.bottomNavHome.setOnNavigationItemSelectedListener { item ->
