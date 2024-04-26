@@ -7,6 +7,8 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.quizzapp.models.Account
+import kotlinx.coroutines.flow.Flow
+
 @Dao
 interface AccountDao {
     @Insert
@@ -17,10 +19,10 @@ interface AccountDao {
     suspend fun deleteAccount(account: Account)
 
     @Query("select * from tbl_account")
-    fun getAllAccount():LiveData<List<Account>>
+    fun getAllAccount():Flow<List<Account>>
 
     @Query("select * from tbl_account where username_col=:username AND password_col=:password ")
-    fun getAllAccountWithUsernameAndPassword(username: String, password: String):LiveData<Account>
+    fun getAllAccountWithUsernameAndPassword(username: String, password: String):Flow<Account>
 
 
     //    @Query("select * from tbl_quizset where name_col=:name")

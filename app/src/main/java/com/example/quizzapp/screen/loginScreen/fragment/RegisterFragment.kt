@@ -11,11 +11,14 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.quizzapp.R
 import com.example.quizzapp.databinding.FragmentRegisterBinding
 import com.example.quizzapp.models.Account
 import com.example.quizzapp.viewmodel.AccountViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -86,6 +89,7 @@ class RegisterFragment : Fragment() {
                     true
                 )
                 accountViewModel.insertAccount(account)
+
             }
 
         }
@@ -132,9 +136,15 @@ class RegisterFragment : Fragment() {
 
     fun checkAccountList(): Boolean {
         var accounts: List<Account>? = null
-        accountViewModel.getAllAccount().observe(requireActivity(), Observer {
-            accounts = it
-        })
+//        accountViewModel.getAllAccount().observe(requireActivity(), Observer {
+//            accounts = it
+//        })
+        // Flow
+        lifecycleScope.launch {
+            accountViewModel.getAllAccount().collect{
+                accounts = it
+            }
+        }
         return accounts?.isEmpty() == true
 
     }

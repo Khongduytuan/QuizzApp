@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import com.example.quizzapp.database.AccountDatabase
 import com.example.quizzapp.database.dao.AccountDao
 import com.example.quizzapp.models.Account
+import kotlinx.coroutines.flow.Flow
 
 class AccountRepository(app: Application) {
     private val accountDao: AccountDao
@@ -19,9 +20,9 @@ class AccountRepository(app: Application) {
     suspend fun updateAccount(account: Account) = accountDao.updateAccount(account)
     suspend fun deleteAccount(account: Account) = accountDao.deleteAccount(account)
 
-    fun getAllAccount(): LiveData<List<Account>> = accountDao.getAllAccount()
+    fun getAllAccount(): Flow<List<Account>> = accountDao.getAllAccount()
 
-    fun getAllAccountWithUsernameAndPassword(username: String, password: String): LiveData<Account> {
+    fun getAllAccountWithUsernameAndPassword(username: String, password: String): Flow<Account> {
         Log.d("AccountRepository", "AccountRepository")
         return  accountDao.getAllAccountWithUsernameAndPassword(username, password)
     }

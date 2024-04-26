@@ -3,6 +3,7 @@ package com.example.quizzapp.database.dao
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.quizzapp.models.QuizSet
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface QuizSetDao {
@@ -16,7 +17,7 @@ interface QuizSetDao {
     suspend fun deleteQuizSet(quizSet: QuizSet)
 
     @Query("select * from tbl_quizset")
-    fun getAllQuizSet():LiveData<List<QuizSet>>
+    fun getAllQuizSet():Flow<List<QuizSet>>
 
 //    @Query("select * from tbl_quizset where name_col=:name")
 //    fun getAllQuizSet(name: String):LiveData<List<QuizSet>>

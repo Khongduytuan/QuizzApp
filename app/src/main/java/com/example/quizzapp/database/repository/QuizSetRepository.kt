@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.quizzapp.database.QuizSetDatabase
 import com.example.quizzapp.database.dao.QuizSetDao
 import com.example.quizzapp.models.QuizSet
+import kotlinx.coroutines.flow.Flow
 
 class QuizSetRepository(app: Application) {
     private val quizSetDao:QuizSetDao
@@ -17,5 +18,5 @@ class QuizSetRepository(app: Application) {
     suspend fun deleteQuizSet(quizSet: QuizSet) = quizSetDao.deleteQuizSet(quizSet)
 
 
-    fun getAllQuizSet():LiveData<List<QuizSet>> = quizSetDao.getAllQuizSet()
+    fun getAllQuizSet(): Flow<List<QuizSet>> = quizSetDao.getAllQuizSet()
 }

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.quizzapp.database.repository.AccountRepository
 import com.example.quizzapp.models.Account
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class AccountViewModel(application: Application):ViewModel() {
@@ -18,9 +19,9 @@ class AccountViewModel(application: Application):ViewModel() {
 
 
 
-    fun getAllAccount(): LiveData<List<Account>> = accountRepository.getAllAccount()
+    fun getAllAccount(): Flow<List<Account>> = accountRepository.getAllAccount()
 
-    fun getAllAccountWithUsernameAndPassword(username: String, password: String): LiveData<Account> = accountRepository.getAllAccountWithUsernameAndPassword(username, password)
+    fun getAllAccountWithUsernameAndPassword(username: String, password: String): Flow<Account> = accountRepository.getAllAccountWithUsernameAndPassword(username, password)
 
 
     class AccountViewModelFactory(private val application: Application) : ViewModelProvider.Factory{

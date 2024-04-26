@@ -7,11 +7,19 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.quizzapp.database.repository.QuizSetRepository
 import com.example.quizzapp.models.QuizSet
+import com.example.quizzapp.state.QuizSetDataState
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 
 class QuizSetViewModel(application: Application) : ViewModel() {
     private val quizSetRepository: QuizSetRepository = QuizSetRepository(application)
+
+    private val quizSetStateFlow: MutableStateFlow<QuizSetDataState> = MutableStateFlow(QuizSetDataState.Empty)
+    val _quizSetStateFlow: StateFlow<QuizSetDataState> = quizSetStateFlow
     fun insertQuizSet(quizSet: QuizSet) =
         viewModelScope.launch { quizSetRepository.insertQuizSet(quizSet) }
 
@@ -22,7 +30,25 @@ class QuizSetViewModel(application: Application) : ViewModel() {
         viewModelScope.launch { quizSetRepository.deleteQuizSet(quizSet) }
 
 
-    fun getAllQuizSet():LiveData<List<QuizSet>> = quizSetRepository.getAllQuizSet()
+    // Livedata
+    //fun getAllQuizSet():Flow<List<QuizSet>> = quizSetRepository.getAllQuizSet()
+    // StateFlow
+    fun getAllQuizSet() = viewModelScope.launch {
+        quizSetStateFlow.value = QuizSetDataState.Loading
+        quizSetRepository.getAllQuizSet()
+            .catch { e->
+                quizSetStateFlow.value = QuizSetDataState.Failure(e)
+            }.collect{ data ->
+                if (data.isEmpty()){
+                    quizSetStateFlow.value = QuizSetDataState.Empty
+                }else{
+                    quizSetStateFlow.value = QuizSetDataState.Success(data)
+                }
+
+            }
+
+    }
+
 
 
     class QuizSetViewModelFactory(private val application: Application) : ViewModelProvider.Factory{

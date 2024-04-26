@@ -10,11 +10,14 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.quizzapp.R
 import com.example.quizzapp.databinding.FragmentLoginBinding
 import com.example.quizzapp.screen.homeScreen.HomeActivity
 import com.example.quizzapp.viewmodel.AccountViewModel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class LoginFragment : Fragment() {
@@ -56,32 +59,32 @@ class LoginFragment : Fragment() {
             } else {
                 val username = loginBinding.editTextUsernameFragment.text.toString()
                 val password = loginBinding.editTextPasswordFragment.text.toString()
-//                Log.d("LoginBtn", "$username $password")
-//                var accounts: List<Account>? = null
-                accountViewModel.getAllAccountWithUsernameAndPassword(username, password)
-                    .observe(requireActivity(), Observer {
-                        if(it != null){
-                            val intent = Intent(requireActivity(), HomeActivity::class.java)
-                            Log.d("btnLoginFragment", "Click")
+                // Flow
+                lifecycleScope.launch {
+                    accountViewModel.getAllAccountWithUsernameAndPassword(username, password).collect{
+                        if (it != null){
+                            val intent = Intent(requireContext(), HomeActivity::class.java)
                             requireActivity().startActivity(intent)
                         }
                         else{
-                            Toast.makeText(requireContext(), "Login error", Toast.LENGTH_SHORT)
-                                .show()
+                            Toast.makeText(requireContext(), "Login error", Toast.LENGTH_SHORT).show()
                         }
-                    })
+                    }
+                }
+// Livedate
+//                accountViewModel.getAllAccountWithUsernameAndPassword(username, password)
+//                    .observe(requireActivity(), Observer {
+//                        if(it != null){
+//                            val intent = Intent(requireActivity(), HomeActivity::class.java)
+//                            Log.d("btnLoginFragment", "Click")
+//                            requireActivity().startActivity(intent)
+//                        }
+//                        else{
+//                            Toast.makeText(requireContext(), "Login error", Toast.LENGTH_SHORT)
+//                                .show()
+//                        }
+//                    })
 
-//                Log.d("LoginBtn", (accounts?.isNotEmpty() == true).toString())
-//                if (accounts?.isNotEmpty() == true) {
-//                    Log.d("LoginBtn", accounts?.size.toString())
-//                    val intent = Intent(requireActivity(), HomeActivity::class.java)
-//                    Log.d("btnLoginFragment", "Click")
-//                    requireActivity().startActivity(intent)
-//                } else {
-//                    Log.d("LoginBtn", accounts?.size.toString())
-//                    Toast.makeText(requireContext(), "Login error", Toast.LENGTH_SHORT)
-//                        .show()
-//                }
             }
 
         }
