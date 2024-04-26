@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     android:layout_marginTop="20dp"
     tools:context=".screen.loginScreen.fragment.RegisterFragment">
-
-
     <TextView
         android:id="@+id/textRegisterFragment"
         android:layout_width="match_parent"
@@ -18,8 +16,9 @@
         android:paddingStart="18dp"
         android:textColor="@color/black"
         />
+
     <EditText
-        android:id="@+id/editTextUsernameRegisterFragment"
+        android:id="@+id/editTextFullnameRegisterFragment"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:paddingLeft="12dp"
@@ -31,7 +30,22 @@
         android:background="@drawable/edit_text_background"
         android:drawableStart="@drawable/icon_proflie_outline"
         android:drawablePadding="12dp"
-        android:hint="Username"
+        android:hint="Full Name"
+        android:inputType="text" />
+    <EditText
+        android:id="@+id/editTextUsernameRegisterFragment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="12dp"
+        android:fontFamily="@font/abel"
+        android:textSize="18dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/edit_text_background"
+        android:drawableStart="@drawable/icon_proflie_outline"
+        android:drawablePadding="12dp"
+        android:hint="Email"
         android:inputType="text" />
 
     <EditText
@@ -90,4 +104,7 @@
         android:textColor="#F40F0F"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+
+
 </LinearLayout>
