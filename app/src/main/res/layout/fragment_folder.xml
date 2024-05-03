@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/folderFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ABE5BC"
+    android:orientation="vertical"
+    tools:context=".screen.homeScreen.fragment.FolderFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/search_quiz_set_folder"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="18dp"
+                android:background="@drawable/edit_search_home_background"
+                android:backgroundTint="@color/white"
+                android:drawableStart="@drawable/icon_search"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/abel"
+                android:hint="Serach..."
+                android:inputType="text"
+                android:paddingLeft="12dp"
+                android:textColor="@color/black"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/linear_item_quiz_sets_background"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_quiz_set_linear_layout_folder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="8dp"
+            android:text="Edit Quiz Set"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycle_view_quiz_set_folder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginVertical="8dp" />
+
+        <LinearLayout
+            android:id="@+id/linear_add_new_quiz_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:background="@drawable/button_add_new_quiz_set"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/circle_view_folder"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_round_close" />
+
+            <TextView
+                android:id="@+id/name_quiz_set_folder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/abel"
+                android:gravity="center_horizontal"
+                android:text="Add New QuizSet"
+                android:textColor="@color/black"
+                android:textSize="32sp"
+
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

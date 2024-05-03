@@ -2,20 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="Home"
+        android:title=""
         android:id="@+id/homeFragment"
         app:showAsAction="ifRoom"
         android:icon="@drawable/icon_home_outline"/>
 
     <item
-        android:title="Controller"
+        android:title=""
         app:showAsAction="ifRoom"
         android:id="@+id/controllerFragment"
         android:icon="@drawable/icon_controller"/>
 
+    <item
+        android:title=""
+        app:showAsAction="ifRoom"
+        android:id="@+id/folderFragment"
+        android:icon="@drawable/icon_folder_outline"/>
+
 
     <item
-        android:title="Profile"
+        android:title=""
         app:showAsAction="ifRoom"
         android:id="@+id/profileFragment"
         android:icon="@drawable/icon_proflie_outline"/>

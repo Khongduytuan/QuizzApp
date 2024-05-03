@@ -32,7 +32,10 @@ class QuizSetAdapter(
     override fun getItemCount(): Int = quizSets.size
 
     override fun onBindViewHolder(holder: QuizSetViewModel, position: Int) {
+        val quizSet = quizSets[position]
+        holder.itemView.setOnClickListener { onClick.invoke(quizSet) }
         holder.onBind(quizSets[position])
+
     }
 
     fun setQuizSet(quizSets: List<QuizSet>){

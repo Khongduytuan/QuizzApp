@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.quizzapp.R
 import com.example.quizzapp.databinding.FragmentRegisterBinding
 import com.example.quizzapp.models.Account
+import com.example.quizzapp.state.RegisterAccountDataState
 import com.example.quizzapp.viewmodel.AccountViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -86,9 +88,48 @@ class RegisterFragment : Fragment() {
                     fullname,
                     dateCreated,
                     isAmin,
-                    true
+                    isActive
                 )
+
+                // Live data
                 accountViewModel.insertAccount(account)
+                // State Flow
+                lifecycleScope.launch {
+                    accountViewModel._accountRegisterStateFlow.collect { it ->
+                        when (it) {
+                            is RegisterAccountDataState.Loading ->{
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Loading UI...",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            }
+                            is RegisterAccountDataState.Failure ->{
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Error Register Account ${it.msg}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                            }
+                            is RegisterAccountDataState.Success ->{
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Register Account Success!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+
+                                val bundle = bundleOf(
+                                    "accountNew" to it.data
+                                )
+                                findNavController().navigate(R.id.action_registerFragment_to_loginFragment, bundle)
+                            }
+                        }
+
+                    }
+                }
+
 
             }
 
@@ -141,7 +182,7 @@ class RegisterFragment : Fragment() {
 //        })
         // Flow
         lifecycleScope.launch {
-            accountViewModel.getAllAccount().collect{
+            accountViewModel.getAllAccount().collect {
                 accounts = it
             }
         }

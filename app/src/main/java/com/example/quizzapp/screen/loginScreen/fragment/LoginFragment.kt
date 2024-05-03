@@ -14,7 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.quizzapp.R
 import com.example.quizzapp.databinding.FragmentLoginBinding
+import com.example.quizzapp.models.Account
 import com.example.quizzapp.screen.homeScreen.HomeActivity
+import com.example.quizzapp.state.LoginAccountDataState
 import com.example.quizzapp.viewmodel.AccountViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -38,14 +40,20 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val bundle = arguments
+        val account = bundle?.getSerializable("accountNew") as? Account
+        if (account != null) {
+            loginBinding.editTextUsernameFragment.setText(account.username)
+            loginBinding.editTextPasswordFragment.setText(account.password)
+        }
         loginBinding.textViewAccountLoginFragment.setOnClickListener {
 
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
         }
 
-       with(loginBinding){
-
-       }
+//       with(loginBinding){
+//
+//       }
         loginBinding.btnLoginFragment.setOnClickListener {
 //            val intent = Intent(requireActivity(), HomeActivity::class.java)
 //            Log.d("btnLoginFragment", "Click")
@@ -59,19 +67,60 @@ class LoginFragment : Fragment() {
             } else {
                 val username = loginBinding.editTextUsernameFragment.text.toString()
                 val password = loginBinding.editTextPasswordFragment.text.toString()
-                // Flow
+
+                // State Flow
+                accountViewModel.getAllAccountWithUsernameAndPassword(username, password)
                 lifecycleScope.launch {
-                    accountViewModel.getAllAccountWithUsernameAndPassword(username, password).collect{
-                        if (it != null){
-                            val intent = Intent(requireContext(), HomeActivity::class.java)
-                            requireActivity().startActivity(intent)
+                    accountViewModel._accountLoginStateFlow.collect { it ->
+                        when (it) {
+                            is LoginAccountDataState.Loading -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Loading login...",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            is LoginAccountDataState.Success -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Login Success!",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                val intent = Intent(requireContext(), HomeActivity::class.java)
+                                intent.putExtra("account", it.data)
+                                requireActivity().startActivity(intent)
+                            }
+
+                            is LoginAccountDataState.Failure -> {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Error Login ${it.msg}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                         }
-                        else{
-                            Toast.makeText(requireContext(), "Login error", Toast.LENGTH_SHORT).show()
-                        }
+
                     }
+
                 }
-// Livedate
+                // Flow
+//                lifecycleScope.launch {
+//                    accountViewModel.getAllAccountWithUsernameAndPassword(username, password)
+//                        .collect {
+//                            if (it != null) {
+//                                val intent = Intent(requireContext(), HomeActivity::class.java)
+//                                intent.putExtra("account", it)
+//
+//                                requireActivity().startActivity(intent)
+//                            } else {
+//                                Toast.makeText(requireContext(), "Login error", Toast.LENGTH_SHORT)
+//                                    .show()
+//                            }
+//                        }
+//                }
+
+                // Livedate
 //                accountViewModel.getAllAccountWithUsernameAndPassword(username, password)
 //                    .observe(requireActivity(), Observer {
 //                        if(it != null){

@@ -24,4 +24,9 @@
         android:name="com.example.quizzapp.screen.homeScreen.fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/folderFragment"
+        android:name="com.example.quizzapp.screen.homeScreen.fragment.FolderFragment"
+        android:label="fragment_search_view"
+        tools:layout="@layout/fragment_folder" />
 </navigation>
